@@ -12,7 +12,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (authToken) {
-      navigate("/dashboard");
+      window.history.go(-2);
     }
   }, [authToken, navigate]);
 

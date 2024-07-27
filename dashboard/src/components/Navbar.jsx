@@ -45,7 +45,7 @@ export default function NavBar() {
           {authToken ? (
             <>
               <a
-                href="/dashbord"
+                href="/dashboard"
                 className="block mt-4 md:inline-block md:mt-0 mr-6"
               >
                 Dashboard
