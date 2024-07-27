@@ -7,6 +7,8 @@ import "./index.css";
 import NavBar from "./components/Navbar.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import LoginForm from "./pages/login.jsx";
+import Logout from "./pages/Logout.jsx";
+import RegisterForm from "./pages/Register.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,6 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Routes>
           <Route element={<App />} path="/" />
           <Route element={<LoginForm />} path="/login" />
+          <Route element={<Logout />} path="/logout" />
+          <Route element={<RegisterForm />} path="/register" />
           <Route
             element={<ProtectedRoute element={() => <h1>LOL</h1>} />}
             path="/protected"

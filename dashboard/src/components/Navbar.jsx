@@ -43,9 +43,17 @@ export default function NavBar() {
             Features
           </a>
           {authToken ? (
-            <a href="/dashbord" className="block mt-4 md:inline-block md:mt-0">
-              Dashboard
-            </a>
+            <>
+              <a
+                href="/dashbord"
+                className="block mt-4 md:inline-block md:mt-0 mr-6"
+              >
+                Dashboard
+              </a>
+              <a href="/logout" className="block mt-4 md:inline-block md:mt-0">
+                Logout
+              </a>
+            </>
           ) : (
             <a href="/login" className="block mt-4 md:inline-block md:mt-0">
               Login
