@@ -20,21 +20,35 @@ function authenticationRequired(req, res, next) {
       // If the token is invalid, return a 403 error
       return res.status(403).json({ error: "Forbidden" });
     }
-    // Attach the user object to the request object
-    user = prisma.user
+    // Get the session
+    const session = prisma.session
       .findUnique({
         where: {
-          id: user.id,
+          id: user.sessionId,
+        },
+        include: {
+          user: true,
         },
       })
-      .then((user) => {
+      .then((session) => {
+        if (!session.active) {
+          // If the session does not exist, return a 403 error
+          return res.status(403).json({ error: "Forbidden" });
+        }
+        // Attach the user to the request object
         req.user = {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          imageUrl: user.imageUrl,
+          id: session.user.id,
+          email: session.user.email,
+          sessionId: session.id,
+          name: session.user.name,
+          imageUrl: session.user.imageUrl,
         };
+        // Call the next middleware
         next();
+      })
+      .catch((e) => {
+        // If the session does not exist, return a 403 error
+        return res.status(403).json({ error: "Forbidden" });
       });
   });
 }
