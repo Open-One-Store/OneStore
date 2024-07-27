@@ -69,8 +69,9 @@ model Item {
   title       String
   description String?
   itemType    ItemType
-  url         String?
-  filePath    String?
+  url         String? // In case of type link, video, other
+  filePath    String? // In case of type file
+  text        String? // In case of type text
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   user        user      @relation(fields: [userId], references: [id])
@@ -97,5 +98,6 @@ enum ItemType {
   file
   video
   link
+  text
   other
 }
