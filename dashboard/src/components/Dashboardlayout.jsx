@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import DashboardHome from "../pages/dashboard/Home";
 import Items from "../pages/dashboard/Items";
+import ItemData from "../pages/dashboard/ItemData";
 
 export default function DashboardLayout() {
   return (
@@ -13,6 +14,7 @@ export default function DashboardLayout() {
         <Routes>
           <Route path="/" element={<DashboardHome />} />
           <Route path="/items" element={<Items />} />
+          <Route path="/items/:id" element={<ItemData />} />
           <Route path="/settings" element={<h1>Settings</h1>} />
         </Routes>
       </div>

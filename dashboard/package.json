@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.15",
+    "@tanstack/react-query-devtools": "^5.51.15",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",
     "react": "^18.3.1",
