@@ -262,4 +262,92 @@ router.delete("/:id", authenticationRequired, async (req, res, next) => {
   }
 });
 
+// Add Tag to Item
+router.post("/:id/tags", authenticationRequired, async (req, res, next) => {
+  try {
+    const existItem = await prisma.item.findUnique({
+      where: {
+        userId: req.user.id,
+        id: req.params.id,
+      },
+    });
+    if (!existItem) {
+      // If item not found, return 404
+      return res.status(404).json({ message: "Item not found" });
+    }
+    // Add the tag to the item
+    const itemTag = await prisma.itemTag.create({
+      data: {
+        itemId: req.params.id,
+        tagId: req.body.tagId,
+      },
+    });
+    // Return the item tag
+    res.json(itemTag);
+  } catch (e) {
+    next(e);
+  }
+});
+
+// Remove Tag from Item
+router.delete(
+  "/:id/tags/:tagId",
+  authenticationRequired,
+  async (req, res, next) => {
+    try {
+      const existItem = await prisma.item.findUnique({
+        where: {
+          userId: req.user.id,
+          id: req.params.id,
+        },
+      });
+      if (!existItem) {
+        // If item not found, return 404
+        return res.status(404).json({ message: "Item not found" });
+      }
+      // Remove the tag from the item
+      await prisma.itemTag.delete({
+        where: {
+          itemId: req.params.id,
+          tagId: req.params.tagId,
+        },
+      });
+      // Return success
+      res.json({ message: "Tag removed" });
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
+// Set category for item
+router.put("/:id/category", authenticationRequired, async (req, res, next) => {
+  try {
+    const existItem = await prisma.item.findUnique({
+      where: {
+        userId: req.user.id,
+        id: req.params.id,
+      },
+    });
+    if (!existItem) {
+      // If item not found, return 404
+      return res.status(404).json({ message: "Item not found" });
+    }
+    // Update the category
+    const item = await prisma.item.update({
+      where: {
+        userId: req.user.id,
+        id: req.params.id,
+      },
+      data: {
+        categoryId: req.body.categoryId,
+      },
+    });
+    // Return the updated item
+    res.json(item);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
