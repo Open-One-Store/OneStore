@@ -78,6 +78,7 @@ router.get("/:id", authenticationRequired, async (req, res, next) => {
   }
 });
 
+// Update a category by id
 router.put("/:id", authenticationRequired, async (req, res, next) => {
   try {
     // Find the category by id
@@ -110,6 +111,7 @@ router.put("/:id", authenticationRequired, async (req, res, next) => {
   }
 });
 
+// Delete a category by id
 router.delete("/:id", authenticationRequired, async (req, res, next) => {
   try {
     // Find the category by id
