@@ -1,0 +1,27 @@
+{
+  "name": "onestorebackend",
+  "version": "0.0.1",
+  "description": "The Backend for both OneStore App and OneStore WebUI",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Open-One-Store/OneStore.git"
+  },
+  "keywords": [
+    "OneStore"
+  ],
+  "author": "Open One Store",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Open-One-Store/OneStore/issues"
+  },
+  "homepage": "https://github.com/Open-One-Store/OneStore#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "minio": "^8.0.1",
+    "prisma": "^5.17.0"
+  }
+}
