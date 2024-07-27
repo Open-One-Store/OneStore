@@ -14,14 +14,17 @@ datasource db {
 }
 
 model user {
-  id        String    @id @default(cuid())
-  email     String    @unique
+  id        String     @id @default(cuid())
+  email     String     @unique
   name      String?
   password  String
   imageUrl  String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   sessions  session[]
+  Category  Category[]
+  Tag       Tag[]
+  Item      Item[]
 }
 
 model session {
@@ -32,4 +35,67 @@ model session {
   updatedAt DateTime @updatedAt
 
   user user @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        user     @relation(fields: [userId], references: [id])
+  Items       Item[]
+
+  @@index([userId])
+}
+
+model Tag {
+  id        String    @id @default(uuid())
+  userId    String
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      user      @relation(fields: [userId], references: [id])
+  ItemTags  ItemTag[]
+
+  @@index([userId])
+}
+
+model Item {
+  id          String    @id @default(uuid())
+  userId      String
+  categoryId  String?
+  title       String
+  description String?
+  itemType    ItemType
+  url         String?
+  filePath    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        user      @relation(fields: [userId], references: [id])
+  Category    Category? @relation(fields: [categoryId], references: [id])
+  ItemTags    ItemTag[]
+
+  @@index([userId])
+  @@index([categoryId])
+}
+
+model ItemTag {
+  id     String @id @default(uuid())
+  itemId String
+  tagId  String
+  Item   Item   @relation(fields: [itemId], references: [id])
+  Tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([itemId, tagId])
+  @@index([itemId])
+  @@index([tagId])
+}
+
+enum ItemType {
+  file
+  video
+  link
+  other
 }
