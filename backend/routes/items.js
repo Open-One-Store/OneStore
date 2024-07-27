@@ -35,6 +35,36 @@ router.get("/", authenticationRequired, async (req, res, next) => {
         },
       };
     }
+    if (req.query.search) {
+      filters.where.OR = [
+        {
+          title: {
+            contains: req.query.search,
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: req.query.search,
+            mode: "insensitive",
+          },
+        },
+      ];
+    }
+    if (req.query.itemType) {
+      filters.where.itemType = req.query.itemType;
+    }
+    if (req.query.limit) {
+      filters.take = parseInt(req.query.limit);
+    }
+    if (req.query.offset) {
+      filters.skip = parseInt(req.query.offset);
+    }
+    if (req.query.orderBy) {
+      filters.orderBy = {
+        [req.query.orderBy]: req.query.orderDirection || "asc",
+      };
+    }
     // Find all items that belong to the logged in user
     const items = await prisma.item.findMany(filters);
     // Return the items
