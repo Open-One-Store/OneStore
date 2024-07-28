@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import DashboardHome from "../pages/dashboard/Home";
 import Items from "../pages/dashboard/Items";
 import ItemData from "../pages/dashboard/ItemData";
+import AddTags from "../pages/dashboard/addTags";
 
 export default function DashboardLayout() {
   return (
@@ -15,6 +16,7 @@ export default function DashboardLayout() {
           <Route path="/" element={<DashboardHome />} />
           <Route path="/items" element={<Items />} />
           <Route path="/items/:id" element={<ItemData />} />
+          <Route path="/tags/add" element={<AddTags />} />
           <Route path="/settings" element={<h1>Settings</h1>} />
         </Routes>
       </div>

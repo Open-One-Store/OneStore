@@ -11,11 +11,11 @@ export default function Items() {
     queryKey: ["items", search, selectedTag],
     queryFn: async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_PUBLIC_API_URL}/items?limit=10${
+        `${import.meta.env.VITE_PUBLIC_API_URL}/items?${
           search !== "" ? `&search=${search}` : ""
         }${
           selectedTag !== "" ? `&tagId=${selectedTag}` : ""
-        }?orderBy=updatedAt&orderDirection=desc`,
+        }&orderBy=updatedAt&orderDirection=desc`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -76,6 +76,11 @@ export default function Items() {
               {tag.name}
             </span>
           ))}
+          <a href="/dashboard/tags/add">
+            <button className="bg-gray-700 p-2 px-5 rounded-full hover:bg-blue-500">
+              +
+            </button>
+          </a>
           {!tags && <p>Loading...</p>}
         </div>
       </div>

@@ -11,7 +11,7 @@ export default function DashboardHome() {
       const response = await fetch(
         `${import.meta.env.VITE_PUBLIC_API_URL}/items?limit=6${
           search !== "" ? `&search=${search}` : ""
-        }?orderBy=updatedAt&orderDirection=desc`,
+        }&orderBy=updatedAt&orderDirection=desc`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
