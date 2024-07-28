@@ -172,6 +172,24 @@ router.post(
   }
 );
 
+async function getItemTags(itemId) {
+  const itemTags = await prisma.itemTag.findMany({
+    where: {
+      itemId: itemId,
+    },
+  });
+  const tags = [];
+  for (const itemTag of itemTags) {
+    const tag = await prisma.tag.findUnique({
+      where: {
+        id: itemTag.tagId,
+      },
+    });
+    tags.push(tag);
+  }
+  return tags;
+}
+
 // Get item by ID
 router.get("/:id", authenticationRequired, async (req, res, next) => {
   try {
@@ -191,15 +209,7 @@ router.get("/:id", authenticationRequired, async (req, res, next) => {
       return res.status(404).json({ message: "Item not found" });
     }
     // Populate the tags
-    item.tags = item.ItemTags.map((tag) => {
-      // Find the tag by ID
-      const taga = prisma.tag.findUnique({
-        where: {
-          id: tag.tagId,
-        },
-      });
-      return taga;
-    });
+    item.tags = await getItemTags(item.id);
     if (item.itemType === "file") {
       // If the item is a file, then get the file URL
       item.fileUrl = await minioClient.presignedGetObject(
