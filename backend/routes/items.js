@@ -349,11 +349,17 @@ router.delete(
         // If item not found, return 404
         return res.status(404).json({ message: "Item not found" });
       }
-      // Remove the tag from the item
-      await prisma.itemTag.delete({
+      // Fetch the item tag
+      const itemTag = await prisma.itemTag.findFirst({
         where: {
           itemId: req.params.id,
           tagId: req.params.tagId,
+        },
+      });
+      // Remove the tag from the item
+      await prisma.itemTag.delete({
+        where: {
+          id: itemTag.id,
         },
       });
       // Return success
