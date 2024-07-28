@@ -34,6 +34,39 @@ router.get("/", authenticationRequired, async (req, res, next) => {
           tagId: req.query.tagId,
         },
       };
+      filters.include = {
+        ItemTags: true,
+      };
+    }
+    if (req.query.search) {
+      filters.where.OR = [
+        {
+          title: {
+            contains: req.query.search,
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: req.query.search,
+            mode: "insensitive",
+          },
+        },
+      ];
+    }
+    if (req.query.itemType) {
+      filters.where.itemType = req.query.itemType;
+    }
+    if (req.query.limit) {
+      filters.take = parseInt(req.query.limit);
+    }
+    if (req.query.offset) {
+      filters.skip = parseInt(req.query.offset);
+    }
+    if (req.query.orderBy) {
+      filters.orderBy = {
+        [req.query.orderBy]: req.query.orderDirection || "asc",
+      };
     }
     // Find all items that belong to the logged in user
     const items = await prisma.item.findMany(filters);
@@ -63,6 +96,8 @@ router.post(
         },
       });
       switch (req.body.itemType) {
+        case "image":
+        case "video":
         case "file":
           {
             // Upload the file, if the item type is file
@@ -118,7 +153,6 @@ router.post(
           }
           break;
         case "link":
-        case "video":
         case "other":
           {
             // Update the item with the link
@@ -142,6 +176,24 @@ router.post(
   }
 );
 
+async function getItemTags(itemId) {
+  const itemTags = await prisma.itemTag.findMany({
+    where: {
+      itemId: itemId,
+    },
+  });
+  const tags = [];
+  for (const itemTag of itemTags) {
+    const tag = await prisma.tag.findUnique({
+      where: {
+        id: itemTag.tagId,
+      },
+    });
+    tags.push(tag);
+  }
+  return tags;
+}
+
 // Get item by ID
 router.get("/:id", authenticationRequired, async (req, res, next) => {
   try {
@@ -161,16 +213,8 @@ router.get("/:id", authenticationRequired, async (req, res, next) => {
       return res.status(404).json({ message: "Item not found" });
     }
     // Populate the tags
-    item.tags = item.ItemTags.map((tag) => {
-      // Find the tag by ID
-      const taga = prisma.tag.findUnique({
-        where: {
-          id: tag.tagId,
-        },
-      });
-      return taga;
-    });
-    if (item.itemType === "file") {
+    item.tags = await getItemTags(item.id);
+    if (item.filePath) {
       // If the item is a file, then get the file URL
       item.fileUrl = await minioClient.presignedGetObject(
         process.env.MINIO_BUCKET,
@@ -305,11 +349,17 @@ router.delete(
         // If item not found, return 404
         return res.status(404).json({ message: "Item not found" });
       }
-      // Remove the tag from the item
-      await prisma.itemTag.delete({
+      // Fetch the item tag
+      const itemTag = await prisma.itemTag.findFirst({
         where: {
           itemId: req.params.id,
           tagId: req.params.tagId,
+        },
+      });
+      // Remove the tag from the item
+      await prisma.itemTag.delete({
+        where: {
+          id: itemTag.id,
         },
       });
       // Return success
