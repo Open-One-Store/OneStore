@@ -3,52 +3,9 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import {
-  FaFile,
-  FaFolder,
-  FaImage,
-  FaLink,
-  FaStickyNote,
-  FaVideo,
-} from "react-icons/fa";
-
-const getItemIcon = (type) => {
-  switch (type) {
-    case "image":
-      return <FaImage className="text-4xl text-gray-300 my-2" />;
-    case "video":
-      return <FaVideo className="text-4xl text-gray-300 my-2" />;
-    case "file":
-      return <FaFile className="text-4xl text-gray-300 my-2" />;
-    case "text":
-      return <FaStickyNote className="text-4xl text-gray-300 my-2 " />;
-    case "link":
-      return <FaLink className="text-4xl text-gray-300 my-2" />;
-    default:
-      return <FaFile className="text-4xl text-gray-300 my-2" />;
-  }
-};
-
-function timeAgo(input) {
-  const date = input instanceof Date ? input : new Date(input);
-  const formatter = new Intl.RelativeTimeFormat("en");
-  const ranges = {
-    years: 3600 * 24 * 365,
-    months: 3600 * 24 * 30,
-    weeks: 3600 * 24 * 7,
-    days: 3600 * 24,
-    hours: 3600,
-    minutes: 60,
-    seconds: 1,
-  };
-  const secondsElapsed = (date.getTime() - Date.now()) / 1000;
-  for (let key in ranges) {
-    if (ranges[key] < Math.abs(secondsElapsed)) {
-      const delta = secondsElapsed / ranges[key];
-      return formatter.format(Math.round(delta), key);
-    }
-  }
-}
+import { FaFolder } from "react-icons/fa";
+import { getItemIcon } from "../../utils/getItemIcon";
+import timeAgo from "../../utils/timeAgo";
 
 export default function Items() {
   const { authToken } = useContext(AuthContext);

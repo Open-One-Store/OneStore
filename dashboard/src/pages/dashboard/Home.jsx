@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
+import timeAgo from "../../utils/timeAgo";
+import { getItemIcon } from "../../utils/getItemIcon";
 
 export default function DashboardHome() {
   const { authToken } = useContext(AuthContext);
@@ -46,8 +48,9 @@ export default function DashboardHome() {
               key={item.id}
               className="bg-gray-700 rounded-lg p-4 shadow-lg flex flex-col hover:bg-gray-800 transition-all duration-200"
             >
+              {getItemIcon(item.itemType)}
               <h3 className="text-xl font-bold">{item.title}</h3>
-              <p>{item.description}</p>
+              <small className="text-gray-400">{timeAgo(item.updatedAt)}</small>
             </a>
           ))}
         </div>
