@@ -69,8 +69,8 @@ model Item {
   title       String
   description String?
   itemType    ItemType
-  url         String? // In case of type link, video, other
-  filePath    String? // In case of type file, image
+  url         String? // In case of type link, other
+  filePath    String? // In case of type file, image, video
   text        String? // In case of type text
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

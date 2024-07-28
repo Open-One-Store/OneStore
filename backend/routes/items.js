@@ -97,6 +97,7 @@ router.post(
       });
       switch (req.body.itemType) {
         case "image":
+        case "video":
         case "file":
           {
             // Upload the file, if the item type is file
@@ -152,7 +153,6 @@ router.post(
           }
           break;
         case "link":
-        case "video":
         case "other":
           {
             // Update the item with the link
