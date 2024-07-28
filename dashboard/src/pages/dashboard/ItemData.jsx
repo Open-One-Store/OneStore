@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import TagSelection from "../../components/TagSelection";
 
@@ -12,6 +12,7 @@ export default function ItemData() {
   const { authToken } = useContext(AuthContext);
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedTag && selectedTag !== "") {
@@ -61,6 +62,22 @@ export default function ItemData() {
       }
       queryClient.invalidateQueries(["item", id]);
     });
+  };
+
+  const handleDelete = () => {
+    confirm("Are you sure you want to delete this item?") &&
+      fetch(`${import.meta.env.VITE_PUBLIC_API_URL}/items/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        queryClient.invalidateQueries(["items"]);
+        navigate(`/dashboard/items`);
+      });
   };
 
   if (isLoading) {
@@ -173,6 +190,12 @@ export default function ItemData() {
               )}
             </div>
           </div>
+          <button
+            className="mt-4 w-full bg-red-500 text-white p-2 px-5 rounded-full"
+            onClick={handleDelete}
+          >
+            Delete Item
+          </button>
         </div>
       </div>
     </div>
