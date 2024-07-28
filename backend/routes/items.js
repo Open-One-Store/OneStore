@@ -214,7 +214,7 @@ router.get("/:id", authenticationRequired, async (req, res, next) => {
     }
     // Populate the tags
     item.tags = await getItemTags(item.id);
-    if (item.itemType === "file") {
+    if (item.filePath) {
       // If the item is a file, then get the file URL
       item.fileUrl = await minioClient.presignedGetObject(
         process.env.MINIO_BUCKET,
