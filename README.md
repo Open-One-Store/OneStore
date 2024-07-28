@@ -2,6 +2,14 @@
 
 OneStore is a Free and Open Source Software (FOSS) designed to revolutionize the way users save and access their digital content. It enables users to effortlessly save files, videos, links, and other sharable items from any device or platform to a single, unified drive location, ensuring easy and organized access anywhere, anytime.
 
+## Getting Started
+
+### Installation
+
+To get started with OneStore, follow the readme instructions in each of the respective components:
+- [Backend](backend/README.md)
+- [Dashboard Website](dashboard/README.md)
+
 ## Key Components
 
 ### Mobile Apps
@@ -10,21 +18,6 @@ OneStore is a Free and Open Source Software (FOSS) designed to revolutionize the
   - Simple sharing interface to save content directly to OneStore.
   - Offline saving capabilities with automatic upload when connected to the internet.
 - **Platforms:** Android and iOS
-
-### Web Extensions
-- **Functionality:** Users can save content from websites directly to OneStore.
-- **Features:**
-  - Browser buttons for one-click saving.
-  - Support for saving entire web pages, links, and media.
-- **Platforms:** Chromium browsers, Firefox
-
-### Desktop Apps
-- **Functionality:** Users can save files, screenshots, and links from their desktop directly to OneStore.
-- **Features:**
-  - Drag-and-drop interface for easy file saving.
-  - Hotkeys for instant saving.
-  - Integration with system tray for quick access.
-- **Platforms:** Windows, macOS, and Linux
 
 ### Dashboard Website
 - **Functionality:** A central hub for users to view and manage all saved content in their OneStore vault.
@@ -55,29 +48,18 @@ OneStore is a Free and Open Source Software (FOSS) designed to revolutionize the
 6. **Privacy and Security:**
    - OneStore prioritizes user privacy and security, implementing robust encryption and secure access protocols.
 
-## Use Cases
+## Tech Stacks used in the various components:
 
-1. **Students and Educators:**
-   - Save and organize study materials, research articles, and educational videos in one place.
+### Backend
+1. ExpressJS
+2. Prisma
+3. PostgreSQL
+4. Minio
 
-2. **Professionals:**
-   - Easily save and access work documents, project files, and important links across devices.
-
-3. **Content Creators:**
-   - Store and manage creative assets like photos, videos, and design files efficiently.
-   - Save your ideas as you think of them, pick them up later on any device.
-
-4. **General Users:**
-   - Simplify digital life by keeping personal files, travel itineraries, recipes, and more in one accessible location.
-
-## Getting Started
-
-### Prerequisites
- TO BE ADDED
-
-### Installation
-
-TO BE ADDED
+### Dashboard Website
+1. ReactJS
+2. Vite
+3. Tailwind CSS
 
 ## Contributing
 We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to get started.
