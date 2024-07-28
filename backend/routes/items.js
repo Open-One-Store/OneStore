@@ -34,6 +34,9 @@ router.get("/", authenticationRequired, async (req, res, next) => {
           tagId: req.query.tagId,
         },
       };
+      filters.include = {
+        ItemTags: true,
+      };
     }
     if (req.query.search) {
       filters.where.OR = [
