@@ -4,6 +4,7 @@ import DashboardHome from "../pages/dashboard/Home";
 import Items from "../pages/dashboard/Items";
 import ItemData from "../pages/dashboard/ItemData";
 import AddTags from "../pages/dashboard/addTags";
+import AddItems from "../pages/dashboard/AddItems";
 
 export default function DashboardLayout() {
   return (
@@ -15,6 +16,7 @@ export default function DashboardLayout() {
         <Routes>
           <Route path="/" element={<DashboardHome />} />
           <Route path="/items" element={<Items />} />
+          <Route path="/items/add" element={<AddItems />} />
           <Route path="/items/:id" element={<ItemData />} />
           <Route path="/tags/add" element={<AddTags />} />
           <Route path="/settings" element={<h1>Settings</h1>} />
