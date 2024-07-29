@@ -1,4 +1,14 @@
+import {
+  FaAndroid,
+  FaCloud,
+  FaCodeBranch,
+  FaGithub,
+  FaMagic,
+  FaSync,
+  FaTachometerAlt,
+} from "react-icons/fa";
 import "./App.css";
+import Contributors from "../components/Contributors";
 
 export default function App() {
   return (
@@ -11,17 +21,76 @@ export default function App() {
             Save from anywhere, access from one place.
           </p>
           <a
-            href="#features"
-            className="bg-white mx-3 text-blue-600 font-bold py-2 px-4 rounded-full"
+            href="https://github.com/Open-One-Store/OneStore"
+            target="_blank"
+            className="bg-white inline-flex mx-3 text-blue-600 font-bold py-2 px-4 rounded-full"
           >
-            Learn More
+            <FaGithub className="w-6 h-6 inline-block mr-2" />
+            Source Code
           </a>
           <a
             href="/dashboard"
-            className="bg-white mx-3 text-blue-600 font-bold py-2 px-4 rounded-full"
+            className="bg-white inline-flex mx-3 text-blue-600 font-bold py-2 px-4 rounded-full"
           >
+            <FaTachometerAlt className="w-6 h-6 inline-block mr-2" />
             Go to Dashboard
           </a>
+        </div>
+      </section>
+
+      {/* Download Section */}
+      <section className=" text-white py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold mb-8">Download the App</h2>
+          <a
+            href="https://github.com/Open-One-Store/OneStore/releases/tag/mobile_app"
+            target="_blank"
+            className="bg-white text-blue-600 font-bold py-2 px-4 rounded-full"
+          >
+            <FaAndroid className="w-6 h-6 inline-block mr-2" />
+            Android
+          </a>
+        </div>
+      </section>
+
+      <section className="bg-blue-600 text-white py-20">
+        <div className="container mx-auto px-6 text-justify">
+          <h2 className="text-4xl font-bold mb-8 text-center">Why OneStore?</h2>
+          <p className="text-lg mb-8">
+            In today&apos;s digital age, users are constantly inundated with an
+            overwhelming amount of content spanning across multiple devices and
+            platforms. Managing and organizing these files, videos, links, and
+            other digital assets can be cumbersome and inefficient. Users often
+            find themselves juggling between different storage solutions,
+            leading to fragmented data and wasted time searching for important
+            information. The lack of a unified system to save and access content
+            seamlessly across various devices poses a significant challenge for
+            productivity and organization.
+            <br />
+            <br />
+            <strong>OneStore</strong> is a Free and Open Source Software (FOSS)
+            based on the Apache-2.0 License designed to revolutionize the way
+            users save and access their digital content. It enables users to
+            effortlessly save files, videos, links, and other sharable items
+            from any device or platform to a single, unified drive location,
+            ensuring easy and organized access anywhere, anytime.
+          </p>
+          <div className="flex gap-3">
+            <a
+              href="/dashboard"
+              className="bg-white text-blue-600 font-bold py-2 px-4 rounded-full"
+            >
+              <FaTachometerAlt className="w-6 h-6 inline-block mr-2" />
+              Go to Dashboard
+            </a>
+            <a
+              href="https://github.com/Open-One-Store/OneStore"
+              className="bg-white text-blue-600 font-bold py-2 px-4 rounded-full"
+            >
+              <FaGithub className="w-6 h-6 inline-block mr-2" />
+              Source Code
+            </a>
+          </div>
         </div>
       </section>
 
@@ -29,32 +98,22 @@ export default function App() {
       <section id="features" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12">Features</h2>
-          <div className="flex flex-wrap -mx-6">
-            <div className="w-full md:w-1/3 px-6 mb-12 md:mb-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center justify-center gap-5">
+            <div className="w-full mb-12 md:mb-0">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <svg
-                  className="w-16 h-16 text-blue-600 mx-auto mb-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a8 8 0 018 8v1h1a2 2 0 012 2v2a2 2 0 01-2 2h-2v1a2 2 0 01-2 2h-4a2 2 0 01-2-2v-1H6a2 2 0 01-2-2v-2a2 2 0 012-2h1v-1a8 8 0 018-8zM8 9v1H6a1 1 0 00-1 1v2a1 1 0 001 1h2v1a1 1 0 001 1h4a1 1 0 001-1v-1h2a1 1 0 001-1v-2a1 1 0 00-1-1h-2V9a6 6 0 00-12 0z" />
-                </svg>
-                <h3 className="text-2xl font-bold mb-2">Unified Storage</h3>
+                <FaCloud className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-2xl text-black font-bold mb-2">
+                  Unified Storage
+                </h3>
                 <p className="text-gray-600">
                   All your content in one place for easy access and management.
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-1/3 px-6 mb-12 md:mb-0">
+            <div className="w-full mb-12 md:mb-0">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <svg
-                  className="w-16 h-16 text-blue-600 mx-auto mb-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a8 8 0 018 8v1h1a2 2 0 012 2v2a2 2 0 01-2 2h-2v1a2 2 0 01-2 2h-4a2 2 0 01-2-2v-1H6a2 2 0 01-2-2v-2a2 2 0 012-2h1v-1a8 8 0 018-8zM8 9v1H6a1 1 0 00-1 1v2a1 1 0 001 1h2v1a1 1 0 001 1h4a1 1 0 001-1v-1h2a1 1 0 001-1v-2a1 1 0 00-1-1h-2V9a6 6 0 00-12 0z" />
-                </svg>
-                <h3 className="text-2xl font-bold mb-2">
+                <FaSync className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-2xl text-black font-bold mb-2">
                   Seamless Integration
                 </h3>
                 <p className="text-gray-600">
@@ -62,16 +121,10 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-1/3 px-6 mb-12 md:mb-0">
+            <div className="w-full mb-12 md:mb-0">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <svg
-                  className="w-16 h-16 text-blue-600 mx-auto mb-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a8 8 0 018 8v1h1a2 2 0 012 2v2a2 2 0 01-2 2h-2v1a2 2 0 01-2 2h-4a2 2 0 01-2-2v-1H6a2 2 0 01-2-2v-2a2 2 0 012-2h1v-1a8 8 0 018-8zM8 9v1H6a1 1 0 00-1 1v2a1 1 0 001 1h2v1a1 1 0 001 1h4a1 1 0 001-1v-1h2a1 1 0 001-1v-2a1 1 0 00-1-1h-2V9a6 6 0 00-12 0z" />
-                </svg>
-                <h3 className="text-2xl font-bold mb-2">
+                <FaMagic className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-2xl text-black font-bold mb-2">
                   User-Friendly Interface
                 </h3>
                 <p className="text-gray-600">
@@ -79,8 +132,23 @@ export default function App() {
                 </p>
               </div>
             </div>
+            <div className="w-full mb-12 md:mb-0">
+              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                <FaCodeBranch className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-2xl text-black font-bold mb-2">
+                  Open Source
+                </h3>
+                <p className="text-gray-600">
+                  Free and open-source software with a Apache-2.0 License.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
+
+      <section className=" text-black py-20">
+        <Contributors />
       </section>
 
       {/* Call to Action Section */}
@@ -91,9 +159,18 @@ export default function App() {
           </h2>
           <a
             href="/dashboard"
-            className="bg-white text-blue-600 font-bold py-2 px-4 rounded-full"
+            className="bg-white inline-flex text-blue-600 font-bold py-2 px-4 rounded-full mx-3"
           >
+            <FaTachometerAlt className="w-6 h-6 inline-block mr-2" />
             Go to Dashboard
+          </a>
+          <a
+            href="https://github.com/Open-One-Store/OneStore"
+            target="_blank"
+            className="bg-white inline-flex text-blue-600 font-bold py-2 px-4 rounded-full mx-3"
+          >
+            <FaGithub className="w-6 h-6 inline-block mr-2" />
+            Source Code
           </a>
         </div>
       </section>
