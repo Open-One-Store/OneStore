@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import AuthContext from "../context/AuthContext";
 
 export default function ProtectedRoute({ element: Component, ...rest }) {
-  const pathname = useLocation().pathname;
+  const pathname = useLocation().pathname + useLocation().search;
+  console.log(pathname);
   const { authToken } = useContext(AuthContext);
 
   return authToken ? (
