@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -10,11 +10,15 @@ export default function LoginForm() {
   const { login, authToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (authToken) {
-      window.history.go(-2);
+      const next = location.search.split("next=")[1];
+      console.log(next);
+      navigate(next || "/dashboard");
     }
-  }, [authToken, navigate]);
+  }, [authToken, navigate, location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +32,8 @@ export default function LoginForm() {
       .then((res) => res.json())
       .then((data) => {
         login(data.data.token);
-        navigate("/dashboard");
+        const next = location.search.split("next=")[1];
+        navigate(next || "/dashboard");
       })
       .catch(() => {
         setError("Invalid email or password");
